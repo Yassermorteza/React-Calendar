@@ -28,4 +28,19 @@ table {
             }
         }
     }
+    tbody {
+        tr {
+            td {
+                overflow: hidden;
+                font-family: monospace;
+                height: 10vh;
+                padding-left: 15px;
+                border: 2px solid #e6e8ea;
+                div {
+                    display: flex;
+                    height: 10vh;
+                }
+            }
+        }
+    } 
 }
