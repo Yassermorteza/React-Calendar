@@ -9,6 +9,9 @@ import ErrorBoundary from './ErrorBoundary';
 import Header from './components/Header';
 import Calendar from './components/Calendar';
 import Modal from './components/Modal';
+import Reminder from './components/Reminder';
+
+import { fetchReminders } from './actions/app';
 
 export class App extends Component {
 
@@ -19,7 +22,9 @@ export class App extends Component {
   }
 
   componentDidMount() {
-
+    const { fetchReminders } = this.props;
+    const url = "http://localhost:3000/reminders/";
+    fetchReminders(url);
     this.setState({
       loading: false
     })
@@ -37,7 +42,11 @@ export class App extends Component {
 
     return (
       <ErrorBoundary>
-        {isModalOpen && <Modal></Modal>}
+        {isModalOpen && 
+          <Modal> 
+            <Reminder />
+          </Modal>
+        }
         <Header /> 
         <Calendar />
       </ErrorBoundary>
@@ -49,4 +58,8 @@ export const mapStateToProps = state => ({
   isModalOpen: state.appReducer.isModalOpen,
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = dispatch => ({
+  fetchReminders: url => dispatch(fetchReminders(url))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

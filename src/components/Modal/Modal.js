@@ -13,12 +13,11 @@ class Modal extends Component {
         return (
             <>
                 <div className="modal-layout" ></div>
-                <div className="modal-content" >
+                <div className="modal-window" >
                     <button onClick={closeModal} className="modal-close_btn" >&times;</button>
-                    <div>
+                    <div className="modal-content" >
                         {this.props.children}
                     </div>
-                    <button onClick={closeModal} className="modal-cancel_btn" >Cancel</button> 
                 </div>
             </>
         )
