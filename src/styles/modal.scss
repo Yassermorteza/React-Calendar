@@ -8,14 +8,14 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.modal-content {
-    width: 50%;
-    height: 38vh;
+.modal-window {
+    width: 35%;
+    height: 18vh;
     border: 1px solid;
     z-index: 10;
     position: fixed;
     top: 30%;
-    left: 25%;
+    left: 33%;
     border: none;
     border-radius: 5px;
     background-color: #ffffff;
@@ -30,14 +30,28 @@
             color: #1a73e8;
         }
     }
-    .modal-cancel_btn {
-        position: absolute;
-        bottom: 8px;
-        right: 10px;
-        font-size: 1.2rem;
-        cursor: pointer;
-        background-color: aliceblue;
-        border-radius: 5px;
-        color: darkslategray;  
+    .modal-content {
+        padding: 10px;
+        height: 100%;
+        .reminder-save_btn{
+             position: absolute;
+            bottom: 8px;
+            right: 20%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            background: #1a73e8;
+            color: #fff;  
+        }
+        .modal-cancel_btn {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background-color: #fdfdfd;
+            border-radius: 5px;
+            color: #666f6f; 
+        }
     }
 }

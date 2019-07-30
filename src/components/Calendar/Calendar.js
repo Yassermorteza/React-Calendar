@@ -23,8 +23,21 @@ class Calendar extends Component {
         }
     }
 
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        const { reminders } = this.props;
+        if (reminders.length !== nextProps.reminders.length) {
+            this.setCalendar();
+        }
+
+    }
+
+    selectDay = day => () => {
+        const { openModal } = this.props;
+        openModal(day)
+
+    }
+
     setCalendar = () => {
-        const { today, numberofDays, openModal } = this.props;
         const date = new Date();
         const month = date.getMonth();
         const year = date.getFullYear();
@@ -33,8 +46,16 @@ class Calendar extends Component {
         const day = date.getUTCDate();
         const tdElements = [];
 
+        const { reminders } = this.props;
+        const remindersDate  = [];
+        if (!!reminders.length) {
+            reminders.forEach(element => {
+                remindersDate.push(element.date) // my final code time is over
+            });
+        }
+
         for(let i = 1; i <= numberOfDays; i++) {
-            tdElements.push(<td key={i} onClick={openModal}><div><p className={day === i ? "today-style" : "day-style"} >{i}</p></div></td>); 
+            tdElements.push(<td key={i} onClick={this.selectDay(i)}><div><p className={day === i ? "today-style" : "day-style"} >{i}</p></div></td>); 
         }
 
         const orderedTdElements = [];
@@ -66,6 +87,7 @@ class Calendar extends Component {
                 <Spinner name="ball-spin-fade-loader" color="#00ffff" className="spinner" />
             );
         }
+
         return(
             <table>
                 <thead>
@@ -85,8 +107,12 @@ class Calendar extends Component {
     }
 };
 
-const mapDispatchToProps = dispatch => ({
-    openModal: () => dispatch(openReminderModal())
-})
+export const mapStateToProps = state => ({
+    reminders: state.appReducer.reminders,
+});
 
-export default connect(null, mapDispatchToProps)(Calendar);
+export const mapDispatchToProps = dispatch => ({
+    openModal: day => dispatch(openReminderModal(day))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
