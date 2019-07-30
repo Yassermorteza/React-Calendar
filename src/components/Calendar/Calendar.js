@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Spinner from "react-spinkit";
+
+import { openModal as openReminderModal } from '../../actions/app';
 
 import '../../styles/calendar.scss';
 
@@ -20,12 +23,8 @@ class Calendar extends Component {
         }
     }
 
-    openModal = i => () =>  {
-        console.log(i)
-    }
-
     setCalendar = () => {
-        // const { today, numberofDays, firstDay } = this.props;
+        const { today, numberofDays, openModal } = this.props;
         const date = new Date();
         const month = date.getMonth();
         const year = date.getFullYear();
@@ -35,7 +34,7 @@ class Calendar extends Component {
         const tdElements = [];
 
         for(let i = 1; i <= numberOfDays; i++) {
-            tdElements.push(<td key={i} onClick={this.openModal(i)}><div><p className={day === i ? "today-style" : "day-style"} >{i}</p></div></td>); 
+            tdElements.push(<td key={i} onClick={openModal}><div><p className={day === i ? "today-style" : "day-style"} >{i}</p></div></td>); 
         }
 
         const orderedTdElements = [];
@@ -86,4 +85,8 @@ class Calendar extends Component {
     }
 };
 
-export default Calendar;
+const mapDispatchToProps = dispatch => ({
+    openModal: () => dispatch(openReminderModal())
+})
+
+export default connect(null, mapDispatchToProps)(Calendar);
