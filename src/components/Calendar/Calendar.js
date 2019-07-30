@@ -20,12 +20,22 @@ class Calendar extends Component {
         }
     }
 
+    openModal = i => () =>  {
+        console.log(i)
+    }
+
     setCalendar = () => {
-        const { today, numberofDays, firstDay } = this.props;
+        // const { today, numberofDays, firstDay } = this.props;
+        const date = new Date();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        const numberOfDays = new Date(year, month+1, 0).getDate();
+        const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+        const day = date.getUTCDate();
         const tdElements = [];
 
-        for(let i = 1; i <= 31; i++) {
-            tdElements.push(<td key={i}><div><p>{i}</p></div></td>); 
+        for(let i = 1; i <= numberOfDays; i++) {
+            tdElements.push(<td key={i} onClick={this.openModal(i)}><div><p className={day === i ? "today-style" : "day-style"} >{i}</p></div></td>); 
         }
 
         const orderedTdElements = [];
@@ -34,7 +44,7 @@ class Calendar extends Component {
         for(let i = 0; i <= 6; i++) {
             orderedTdElements.push([])
             for(let j = 0; j <= 6; j++) {
-                if (i === 0 && j >= 2) {
+                if (i === 0 && j >= firstDay) {
                     orderedTdElements[i].push(tdElements[counter++]); 
                 } else if (i > 0 ) {
                     orderedTdElements[i].push(tdElements[counter++]); 
