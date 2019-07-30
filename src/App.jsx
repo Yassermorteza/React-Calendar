@@ -5,10 +5,14 @@ import Spinner from "react-spinkit";
 import "./styles/app.scss";
 import ErrorBoundary from './ErrorBoundary';
 
+import Header from './components/Header';
+
 export class App extends Component {
 
   state = {
     loading: true,
+    today: undefined,
+    currentMonth: undefined,
   }
 
   componentDidMount() {
@@ -29,9 +33,7 @@ export class App extends Component {
 
     return (
       <ErrorBoundary>
-        <Router>
-          <div>React Redux Boilerplate</div>
-        </Router>
+        <Header /> 
       </ErrorBoundary>
     );
   }
