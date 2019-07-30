@@ -1,0 +1,31 @@
+table {
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 98%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px;
+    margin-bottom: 2%;
+    margin-top: 2%; 
+    thead {
+        tr {
+            th {
+                color: #757479;
+                height: 65px;
+                padding: 10px;
+                padding-left: 15px;
+                background-color: #f1f3f3;
+                font-family: monospace;
+                font-size: 1.5rem;
+                cursor: pointer;
+                border: 2px solid;
+            }
+            th:first-child {
+                border-radius: 5px 0 0 0;
+            }
+            th:last-child {
+                border-radius: 0 5px 0 0;
+            }
+        }
+    }
+}

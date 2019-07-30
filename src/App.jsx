@@ -6,6 +6,7 @@ import "./styles/app.scss";
 import ErrorBoundary from './ErrorBoundary';
 
 import Header from './components/Header';
+import Calendar from './components/Calendar';
 
 export class App extends Component {
 
@@ -34,6 +35,7 @@ export class App extends Component {
     return (
       <ErrorBoundary>
         <Header /> 
+        <Calendar />
       </ErrorBoundary>
     );
   }
