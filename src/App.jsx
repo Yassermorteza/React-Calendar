@@ -9,7 +9,7 @@ import ErrorBoundary from './ErrorBoundary';
 import Header from './components/Header';
 import Calendar from './components/Calendar';
 import Modal from './components/Modal';
-import Reminder from './components/Reminder';
+import AddReminder from './components/AddReminder';
 
 import { fetchReminders } from './actions/app';
 
@@ -44,7 +44,7 @@ export class App extends Component {
       <ErrorBoundary>
         {isModalOpen && 
           <Modal> 
-            <Reminder />
+            <AddReminder />
           </Modal>
         }
         <Header /> 

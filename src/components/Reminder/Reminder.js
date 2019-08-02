@@ -1,63 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { closeModal, fetchReminders } from '../../actions/app';
-
+import { fetchReminders } from '../../actions/app';
 
 const url = "http://localhost:3000/reminders/";
 
-
 class Reminder extends Component {
 
-    saveReminder = date => () => {
+    onDeleteReminder = event => {
+        event.stopPropagation();
 
-        const { closeModal, fetchReminders } = this.props;
+        console.log('del');
+        const { reminderId, fetchReminders } = this.props;
 
-        const text = this.textArea.value;
-
-        const reminder = { date, text};
-
-        fetch(url, {
-            method: "POST",
+        const options = {
+            method: "DELETE",
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify(reminder)
-        })
+        };
+
+        fetch(`${url}${reminderId}`, options)
             .then(res => res.json())
             .then(data => {
                 fetchReminders(url);
-                closeModal();
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
     }
 
     render() {
-        const { selectedDay, closeModal } = this.props;
-        const date = new Date();
-        const month = date.getMonth();
-        const year = date.getFullYear();
-        const reminderDate = `${selectedDay}/${month}/${year}`;
-        
-        return(
+        const { title } = this.props;
+        return (
             <>
-                <p>Reminder</p>
-                <p>Date: {reminderDate}</p>
-                <textarea maxLength={30} ref={textArea => this.textArea = textArea }></textarea>
-                <button onClick={closeModal} className="modal-cancel_btn" >Cancel</button>
-                <button onClick={this.saveReminder(reminderDate)} className="reminder-save_btn" >save</button>  
+                <div className="reminder">
+                    <span>{title}</span>
+                    <span className="delete-reminder_btn" onClick={this.onDeleteReminder}>&times;</span>
+                </div>
+
             </>
         )
     }
 };
 
-export const mapStateToProps = state => ({
-    selectedDay: state.appReducer.selectedDay,
-});
-
-export const mapDispatchToProps = dispatch => ({
-    closeModal: () => dispatch(closeModal()),
+const mapDispatchToProps = dispatch => ({
     fetchReminders: url => dispatch(fetchReminders(url))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Reminder);
+export default connect(null, mapDispatchToProps)(Reminder);

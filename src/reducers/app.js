@@ -6,6 +6,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
+    reminderId: null,
     isModalOpen: false,
     selectedDay: undefined,
     reminders: [],
@@ -18,7 +19,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isModalOpen: true,
-                selectedDay: action.day
+                selectedDay: action.day,
+                reminderId: action.reminderId
             };
         case CLOSE_MODAL: 
             return {

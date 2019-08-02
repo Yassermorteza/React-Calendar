@@ -5,9 +5,10 @@ import {
     GET_REMINDERS_HAS_ERROR,
 } from './types';
 
-export const openModal = day => ({
-    type: OPEN_MODAL,
-    day
+export const openModal = (day, reminderId) => ({
+    day,
+    reminderId,
+    type: OPEN_MODAL
 });
 
 export const closeModal = () => ({
@@ -15,12 +16,12 @@ export const closeModal = () => ({
 });
 
 export const fetchReminders = url => {
-    return dispatch => {
+    return dispatch => (
         fetch(url)
             .then(res => res.json()) 
             .then(reminders => dispatch(getReminders(reminders)))
             .catch(err => dispatch(showError(err)))
-    }
+    )
 }
 
 export const getReminders = reminders => ({
