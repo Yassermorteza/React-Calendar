@@ -5,7 +5,6 @@
     z-index: 2;
     position: fixed;
     margin: 0;
-    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal-window {
@@ -19,39 +18,61 @@
     border: none;
     border-radius: 5px;
     background-color: #ffffff;
+    box-shadow: 0px 0px 32px -13px rgba(0,0,0,0.75);
     .modal-close_btn {
         position: absolute;
-        right: 2px;
-        top: 1px;
-        font-size: 1.5rem;
+        right: 5px;
+        top: 5px;
+        font-size: 22px;
         border: none;
         cursor: pointer;
+        color: #5f6368;
+        text-align: center;
         &:hover {
-            color: #1a73e8;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.1);
         }
     }
     .modal-content {
         padding: 10px;
         height: 100%;
         .reminder-save_btn{
-             position: absolute;
-            bottom: 8px;
-            right: 20%;
-            font-size: 1.2rem;
+            position: absolute;
+            bottom: 10px;
+            right: 14px;
+            font-size: 14PX;
             cursor: pointer;
             border-radius: 5px;
             background: #1a73e8;
-            color: #fff;  
+            color: #fff;
+            padding: 8PX 24px;  
         }
-        .modal-cancel_btn {
-            position: absolute;
-            bottom: 8px;
-            right: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            background-color: #fdfdfd;
-            border-radius: 5px;
-            color: #666f6f; 
+        input {
+            color: #3c4043;
+            font-family: sans-serif;
+            font-weight: lighter;
+            font-size: 22px;
+            height: 28px;
+            position: relative;
+            top: 10px;
+            left: 10px;
+            width: 90%;
+            border: none;
+            border-bottom: 1px solid #dadce0;
+            margin-bottom: 15px;
+            &:focus {
+                border-bottom: 2px solid #729df5;
+                &::-webkit-input-placeholder {
+                    opacity: 0;
+                }
+            }
+        }
+        p {
+            color: #222;
+            font-size: 14px;
+            font-weight: 400;
+            padding-left: 8px;
+            line-height: 20px;        
         }
     }
 }
