@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 
 import { fetchReminders } from '../../actions/app';
 
-const url = "http://localhost:3000/reminders/";
+import { REMINDERS_URL } from '../../utils/constants';
 
 class Reminder extends Component {
 
     onDeleteReminder = event => {
         event.stopPropagation();
 
-        console.log('del');
         const { reminderId, fetchReminders } = this.props;
 
         const options = {
@@ -20,10 +19,10 @@ class Reminder extends Component {
             },
         };
 
-        fetch(`${url}${reminderId}`, options)
+        fetch(`${REMINDERS_URL}${reminderId}`, options)
             .then(res => res.json())
             .then(data => {
-                fetchReminders(url);
+                fetchReminders(REMINDERS_URL);
             })
             .catch(err => console.log(err));
     }

@@ -13,6 +13,7 @@ import AddReminder from './components/AddReminder';
 
 import { fetchReminders } from './actions/app';
 
+import { REMINDERS_URL } from './utils/constants';
 export class App extends Component {
 
   state = {
@@ -23,8 +24,7 @@ export class App extends Component {
 
   componentDidMount() {
     const { fetchReminders } = this.props;
-    const url = "http://localhost:3000/reminders/";
-    fetchReminders(url);
+    fetchReminders(REMINDERS_URL );
     this.setState({
       loading: false
     })
