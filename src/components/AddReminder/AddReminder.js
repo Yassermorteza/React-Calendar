@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { closeModal, fetchReminders } from '../../actions/app';
 
 
-const url = "http://localhost:3000/reminders/";
+import { REMINDERS_URL } from '../../utils/constants';
 
 
 class AddReminder extends Component {
@@ -31,10 +31,10 @@ class AddReminder extends Component {
                 body: JSON.stringify(reminder)
             };
 
-            fetch(url, options)
+            fetch(REMINDERS_URL, options)
                 .then(res => res.json())
                 .then(data => {
-                    fetchReminders(url);
+                    fetchReminders(REMINDERS_URL);
                     closeModal();
                 })
                 .catch(err => console.log(err));

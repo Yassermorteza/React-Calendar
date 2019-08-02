@@ -12,12 +12,15 @@ class Modal extends Component {
         const { closeModal } = this.props; 
         return (
             <>
-                <div onClick={closeModal} className="modal-layout" ></div>
+                <div onClick={closeModal} className="modal-layout" >
+                </div>
                 <div className="modal-window" >
-                    <button onClick={closeModal} className="modal-close_btn" >&times;</button>
-                    <div className="modal-content" >
-                        {this.props.children}
-                    </div>
+                    <section className="modal-content">
+                        <button onClick={closeModal} className="modal-close_btn" >&times;</button>
+                        <div>
+                            {this.props.children}
+                        </div>
+                    </section>
                 </div>
             </>
         )

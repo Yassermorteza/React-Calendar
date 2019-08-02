@@ -5,10 +5,14 @@ import Spinner from "react-spinkit";
 import Day from '../Day';
 import { openModal as openReminderModal } from '../../actions/app';
 
+import {
+    WEEK_DAYS,
+    DAYS_IN_WEEK,
+    NUMBER_OF_DAYS,
+    MONTH_FIRST_DAY,
+} from '../../utils/constants';
+
 import '../../styles/calendar.scss';
-
-
-const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 class Calendar extends Component {
 
@@ -39,14 +43,7 @@ class Calendar extends Component {
     }
 
     setCalendar = reminders => {
-        const date = new Date();
-        const month = date.getMonth();
-        const year = date.getFullYear();
-        const numberOfDays = new Date(year, month+1, 0).getDate();
-        const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-        const day = date.getDate();
         const tdElements = [];
-        const DAYS_IN_WEEK = 7;
 
         if (reminders && !!reminders.length) {
             let counter = 0;
@@ -59,11 +56,10 @@ class Calendar extends Component {
 
             reminders.sort(sortbyDate).forEach((element, index) => {
                 const reminderDay = new Date(element.date).getDate();
-                for (let i = 1; i <= numberOfDays; i++) {
+                for (let i = 1; i <= NUMBER_OF_DAYS; i++) {
                     counter++;
                     const reminderId = reminderDay === counter ? element.id : null;
                     tdElements.push(<Day 
-                        day={day}
                         title={element.title}
                         counter={counter}
                         key={`${counter}_${i}`} 
@@ -71,7 +67,7 @@ class Calendar extends Component {
                         reminderDay={reminderDay}
                         onSelectDay={this.onSelectDay}
                     />);
-                    if (counter === numberOfDays) break;
+                    if (counter === NUMBER_OF_DAYS) break;
                     if (reminderDay === counter && reminders.length > 1) { 
                         if(index === reminders.length - 1) {
                             continue;
@@ -84,10 +80,9 @@ class Calendar extends Component {
 
         } else {
 
-            for (let i = 1; i <= numberOfDays; i++) {
+            for (let i = 1; i <= NUMBER_OF_DAYS; i++) {
                 tdElements.push(<Day 
                     key={i}
-                    day={day}
                     onSelectDay={this.onSelectDay}
                 />); 
             };
@@ -100,7 +95,7 @@ class Calendar extends Component {
         for (let i = 0; i < 6; i++) {
             orderedTdElements.push([])
             for (let j = 0; j < DAYS_IN_WEEK; j++) {
-                if (i === 0 && j >= firstDay || i > 0) {
+                if (i === 0 && j >= MONTH_FIRST_DAY || i > 0) {
                     orderedTdElements[i].push(tdElements[counter++]); 
                 } else {
                     orderedTdElements[i].push(<td key={`${i}_${j}`}></td>); 
@@ -127,7 +122,7 @@ class Calendar extends Component {
             <table>
                 <thead>
                     <tr>
-                      {weekDays.map(day => <th key={day}>{day}</th>)}  
+                      {WEEK_DAYS.map(day => <th key={day}>{day}</th>)}  
                     </tr>
                 </thead>
                 <tbody>
