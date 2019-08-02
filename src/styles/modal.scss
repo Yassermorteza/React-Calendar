@@ -33,11 +33,10 @@ $screen-xl-min: 1200px;
     width: 100%;
     position: fixed;
     margin: 0;
+    border: none;
 }
 
 .modal-window {
-    display:table-cell;
-    vertical-align:middle;
     width: 500px;
     min-width: 448px;
     height: 300px;

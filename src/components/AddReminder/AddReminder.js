@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { closeModal, fetchReminders } from '../../actions/app';
 
 
-import { REMINDERS_URL } from '../../utils/constants';
+import { REMINDERS_URL, CURRENT_MONTH, CURRENT_YEAR } from '../../utils/constants';
 
 
 class AddReminder extends Component {
@@ -44,11 +44,8 @@ class AddReminder extends Component {
     }
 
     render() {
-        const { selectedDay } = this.props;
-        const date = new Date();
-        const month = date.getMonth();
-        const year = date.getFullYear();
-        const reminderDate = `${year}/${month}/${selectedDay}`;
+        const { selectedDay } = this.props
+        const reminderDate = `${CURRENT_YEAR}/${CURRENT_MONTH}/${selectedDay}`;
         
         return(
             <>
